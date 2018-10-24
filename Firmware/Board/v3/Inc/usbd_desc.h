@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file           : usbd_desc.c
   * @version        : v1.0_Cube
-  * @brief          : Header for usbd_conf.c file.
+  * @brief          : Header for usbd_desc.c file.
   ******************************************************************************
   * @attention
   *
