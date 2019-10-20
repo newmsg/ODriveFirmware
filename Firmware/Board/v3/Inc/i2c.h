@@ -67,7 +67,7 @@ extern I2C_HandleTypeDef hi2c1;
 
 /* USER CODE END Private defines */
 
-extern void _Error_Handler(char *, int);
+extern void Error_Handler(void);
 
 void MX_I2C1_Init(uint8_t addr);
 

@@ -3,6 +3,7 @@
 #include <math.h>
 #include <float.h>
 #include <cmsis_os.h>
+#include <main.h>
 #include <stm32f4xx_hal.h>
 
 
