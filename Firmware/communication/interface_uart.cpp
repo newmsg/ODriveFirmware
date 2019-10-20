@@ -37,7 +37,7 @@ public:
                 return -1;
             // transmit chunk
             memcpy(tx_buf_, buffer, chunk);
-            if (HAL_UART_Transmit_DMA(&huart4, tx_buf_, chunk) != HAL_OK)
+            if (HAL_UART_Transmit_DMA(&huart2, tx_buf_, chunk) != HAL_OK)
                 return -1;
             buffer += chunk;
             length -= chunk;
@@ -62,12 +62,12 @@ static void uart_server_thread(void * ctx) {
 
     for (;;) {
         // Check for UART errors and restart recieve DMA transfer if required
-        if (huart4.ErrorCode != HAL_UART_ERROR_NONE) {
-            HAL_UART_AbortReceive(&huart4);
-            HAL_UART_Receive_DMA(&huart4, dma_rx_buffer, sizeof(dma_rx_buffer));
+        if (huart2.ErrorCode != HAL_UART_ERROR_NONE) {
+            HAL_UART_AbortReceive(&huart2);
+            HAL_UART_Receive_DMA(&huart2, dma_rx_buffer, sizeof(dma_rx_buffer));
         }
         // Fetch the circular buffer "write pointer", where it would write next
-        uint32_t new_rcv_idx = UART_RX_BUFFER_SIZE - huart4.hdmarx->Instance->NDTR;
+        uint32_t new_rcv_idx = UART_RX_BUFFER_SIZE - huart2.hdmarx->Instance->NDTR;
 
         // deadline_ms = timeout_to_deadline(PROTOCOL_SERVER_TIMEOUT_MS);
         // Process bytes in one or two chunks (two in case there was a wrap)
@@ -94,8 +94,8 @@ void start_uart_server() {
     // DMA is set up to recieve in a circular buffer forever.
     // We dont use interrupts to fetch the data, instead we periodically read
     // data out of the circular buffer into a parse buffer, controlled by a state machine
-    HAL_UART_Receive_DMA(&huart4, dma_rx_buffer, sizeof(dma_rx_buffer));
-    dma_last_rcv_idx = UART_RX_BUFFER_SIZE - huart4.hdmarx->Instance->NDTR;
+    HAL_UART_Receive_DMA(&huart2, dma_rx_buffer, sizeof(dma_rx_buffer));
+    dma_last_rcv_idx = UART_RX_BUFFER_SIZE - huart2.hdmarx->Instance->NDTR;
 
     // Start UART communication thread
     osThreadDef(uart_server_thread_def, uart_server_thread, osPriorityNormal, 0, 1024 /* the ascii protocol needs considerable stack space */);

@@ -176,6 +176,8 @@ int odrive_main(void) {
     start_general_purpose_adc();
 
     // TODO: make dynamically reconfigurable
+    //NOTE: remove this after confirmed USART2 on GPIO 3/4 works well
+    /*
 #if HW_VERSION_MAJOR == 3 && HW_VERSION_MINOR >= 3
     if (board_config.enable_uart) {
         axes[0]->config_.enable_step_dir = false;
@@ -183,6 +185,8 @@ int odrive_main(void) {
         SetGPIO12toUART();
     }
 #endif
+    */
+
     //osDelay(100);
     // Init communications (this requires the axis objects to be constructed)
     init_communication();

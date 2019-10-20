@@ -174,9 +174,9 @@ int main(void)
   MX_SPI3_Init();
   MX_ADC3_Init();
   MX_TIM2_Init();
-  MX_UART4_Init();
-  MX_TIM5_Init();
   MX_TIM13_Init();
+  MX_USART2_UART_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 
   //Required to use OC4 for ADC triggering.
@@ -220,9 +220,8 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 4;
