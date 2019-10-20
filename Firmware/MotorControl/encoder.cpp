@@ -286,8 +286,8 @@ void Encoder::sample_now() {
         } break;
 
         case MODE_SINCOS: {
-            sincos_sample_s_ = (get_adc_voltage(GPIO_3_GPIO_Port, GPIO_3_Pin) / 3.3f) - 0.5f;
-            sincos_sample_c_ = (get_adc_voltage(GPIO_4_GPIO_Port, GPIO_4_Pin) / 3.3f) - 0.5f;
+            sincos_sample_s_ = (get_adc_voltage(GPIO_1_GPIO_Port, GPIO_1_Pin) / 3.3f) - 0.5f;
+            sincos_sample_c_ = (get_adc_voltage(GPIO_2_GPIO_Port, GPIO_2_Pin) / 3.3f) - 0.5f;
         } break;
 
         default: {
