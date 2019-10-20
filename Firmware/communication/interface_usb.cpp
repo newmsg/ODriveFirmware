@@ -13,6 +13,8 @@
 
 #include <odrive_main.h>
 
+extern USBD_HandleTypeDef hUsbDeviceFS;
+
 osThreadId usb_thread;
 USBStats_t usb_stats_ = {0};
 

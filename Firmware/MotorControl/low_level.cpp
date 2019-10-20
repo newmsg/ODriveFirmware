@@ -334,7 +334,7 @@ void start_general_purpose_adc() {
     hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
     if (HAL_ADC_Init(&hadc1) != HAL_OK)
     {
-        _Error_Handler((char*)__FILE__, __LINE__);
+        Error_Handler();
     }
 
     // Set up sampling sequence (channel 0 ... channel 15)
@@ -343,7 +343,7 @@ void start_general_purpose_adc() {
         sConfig.Channel = channel << ADC_CR1_AWDCH_Pos;
         sConfig.Rank = channel + 1; // rank numbering starts at 1
         if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-            _Error_Handler((char*)__FILE__, __LINE__);
+            Error_Handler();
     }
 
     HAL_ADC_Start_DMA(&hadc1, reinterpret_cast<uint32_t*>(adc_measurements_), ADC_CHANNEL_COUNT);

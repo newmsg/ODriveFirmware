@@ -60,6 +60,7 @@
 #include "usbd_ctlreq.h"
 #include <cmsis_os.h>
 #include <freertos_vars.h>
+#include "usbd_desc.h"
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
@@ -425,7 +426,7 @@ static uint8_t  USBD_CDC_Init (USBD_HandleTypeDef *pdev, uint8_t cfgidx)
     }
 
     /* Prepare ODrive Out endpoint to receive next packet */
-    USBD_LL_PrepareReceive(pdev, DRIVE_OUT_EP, hcdc->ODRIVE_Rx.Buffer,
+    USBD_LL_PrepareReceive(pdev, ODRIVE_OUT_EP, hcdc->ODRIVE_Rx.Buffer,
                            CDC_DATA_FS_OUT_PACKET_SIZE);
   }
   return ret;

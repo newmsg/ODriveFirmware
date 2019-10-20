@@ -370,6 +370,7 @@ int NVM_commit(void) {
     return status;
 }
 
+#if 0
 
 #include <cmsis_os.h>
 /** @brief Call this at startup to test/demo the NVM driver
@@ -449,3 +450,5 @@ void NVM_demo(void) {
 fail:
     printf("NVM test failed at %d!\r\n", progress);
 }
+
+#endif
