@@ -7,8 +7,15 @@ template<class T> inline Print& operator <<(Print &obj,     T arg) { obj.print(a
 template<>        inline Print& operator <<(Print &obj, float arg) { obj.print(arg, 4); return obj; }
 
 // Serial to the ODrive
-SoftwareSerial odrive_serial(8, 9); //RX (ODrive TX), TX (ODrive RX)
 // Note: you must also connect GND on ODrive to GND on Arduino!
+
+// Uncomment if using Arduino Uno
+// SoftwareSerial odrive_serial(8, 9); //RX (ODrive TX), TX (ODrive RX)
+
+// Uncomment if using an Arduino with hardware serial.
+// You can of course change which serial is used.
+// Check your specific arduino board documentation for TX/RX pinout.
+HardwareSerial& odrive_serial = Serial1;
 
 // ODrive object
 ODriveArduino odrive(odrive_serial);
